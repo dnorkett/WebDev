@@ -1,0 +1,130 @@
+<html lang="en">
+<head>
+    <title> Flexbox Examples </title>
+    <style>
+      .flex-container-center {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          display: flex;
+          flex-flow :row wrap; /*Same as flex-direction row and flex-wrap wrap*/
+          justify-content: space-around;
+      }      
+      .flex-item-center {
+          background-color: tomato;
+          padding: 5px;
+          width: 200px;
+          height: 150px;
+          margin-top: 10px;
+          line-height: 150px;
+          color:white;
+          font-weight: bold;
+          font-size: 3em;
+          text-align:center;
+      }
+
+
+      .navigation {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: flex-end;
+          list-style: none;
+          margin: 0;
+          background: deepskyblue;                    
+      }
+      .navigation a {
+          text-decoration: none;
+          display: block;
+          padding: 1em;
+          color:white; 
+      }
+
+
+      .wrapper-fancy {
+          display: flex;
+          flex-flow: row wrap;
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .wrapper-fancy > * {
+          padding: 10px;
+          flex: 1 100%;
+      }
+      .header {
+          background-color: tomato;
+      }
+      .background {
+          background-color:lightgreen;
+      }
+      .main {
+          text-align: left;
+          background: deepskyblue;
+      }
+      .aside-1 {
+         background: gold;
+      }
+      .aside-2 {
+        background: hotpink;
+      }
+      .footer {
+          background: teal;
+      }
+      body {
+          padding: 2em;
+      }
+      @media all and (min-width: 600px) {
+        .aside { flex: 1 0 0; }
+            }
+
+        @media all and (min-width: 800px) {
+        .main    { flex: 3 0px; }
+        .aside-1 { order: 1; } 
+        .main    { order: 2; }
+        .aside-2 { order: 3; }
+        .footer  { order: 4; }
+        }
+
+
+    </style>
+</head>
+
+<body style="font-family:Calibri;">
+    <div>
+        <h2> Perfect Center Example</h2>
+        <ul class="flex-container-center">
+            <li class="flex-item-center">1</li>
+            <li class="flex-item-center">2</li>
+            <li class="flex-item-center">3</li>
+            <li class="flex-item-center">4</li>
+            <li class="flex-item-center">5</li>
+            <li class="flex-item-center">6</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2> Nav Example </h2>
+        <ul class="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Contact</a></li>            
+        </ul>
+    </div>
+
+    <div>
+        <h2> Fancy Example </h2>
+        <div class="wrapper-fancy"> 
+            <header class="header"> Header </header>
+            <article class="main">
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p> 
+            </article>
+            <aside class="aside aside-1"> Aside 1 </aside>
+            <aside class="aside aside-2"> Aside 2 </aside>
+            <footer class="footer"> Footer </footer>
+        </div>
+
+    </div>    
+    
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>To-Do List</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>        
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav>
+            <h2> To-Do</h2>
+            <h2> List </h2>
+            
+            <ul>
+                <li id="new">New To-Do List</li>
+                <li id="pbj">Sample PBJ Recipe</li>
+                <li id="work">Sample Work Day</li>
+            </ul>
+        </nav>
+        
+        <main>
+            <div>
+                <button onclick="handlers.addTodo()"> Add </button>
+                <input id ="addTodoTextInput" type="text">
+            </div>
+            
+            <div>
+                <button onclick="handlers.changeTodo()"> Change To-Do </button>
+                <input id="changeTodoPositionInput" type="number" style="width: 36px;">
+                <input id="changeTodoTextInput" type="text">
+            </div>
+        
+            <div>                
+                <button onclick="handlers.toggleAll()"> Toggle All </button>
+            </div>
+        
+            <ul>        
+            </ul>
+        </main>
+
+        <footer>
+            <p> </p>
+        </footer>
+
+        <script src='main.js'></script>
+    </div>
+</body>
+
+</html>
