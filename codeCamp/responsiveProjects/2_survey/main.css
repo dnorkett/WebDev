@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Nunito";
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(100deg, rgba(106, 69, 240, 0.61), rgba(65, 68, 231, 0.568)), url("https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;    
+    height: 100%;
+    width: 100%;   
+    margin: 0;
+    padding: 0;
+    z-index: -100;    
+}
+
+body {
+    color: white;
+    text-align: center;    
+}
+
+header {
+    margin-top: 40px;
+    padding: 0;
+    line-height: 1;
+}
+
+header > p {
+    font-weight: extra-light;
+}
+
+#container {
+    background-color: rgba(32, 32, 32, 0.85);
+    border-radius: 6px;    
+    width: 40vw;
+    margin: 20px auto
+}
+
+form {
+    text-align: left;
+    padding: 50px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.display-block {
+    display: block;
+}
+
+.form-div {
+    margin-bottom: 30px;
+}
+
+.wide-input {
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0;
+    border: 0px;
+    padding: 10px;
+    font-size: 16px;
+    
+}
+.submit {
+    background-color: green;
+    color: white;
+    font-size: 16px;
+}
