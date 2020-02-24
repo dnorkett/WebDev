@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito";
+  }
+
+body {
+    background-color: rgb(247, 247, 247);
+    margin: 0;
+    padding: 0;     
+}
+
+main {
+    width: 65%;
+    margin: auto;
+}
+
+header {    
+    display: flex;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+
+#header-logo {
+    max-width: 320px;    
+    }
+
+#logo-div {
+    width: 65vw;
+    margin: auto 0px;
+}
+
+nav {        
+    width: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-ul {    
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;       
+    justify-content: space-around;    
+    align-items: center;    
+}
+
+.nav-ul > li {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;    
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+  }
+
+#getStarted {    
+    margin: 95px auto 40px auto;    
+    text-align: center;
+    padding: 10px;
+}
+
+input[type=email] {
+    width: 275px;
+    padding: 4px;
+}
+
+input[type=submit] {    
+    background-color: goldenrod;
+    margin-top: 10px;
+    padding: 5px;
+    width: 125px; 
+    border: 0px;    
+    border-radius: 3px;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    display: flex;
+  }
+  
+  #features .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 125px;
+    width: 20vw;
+    color: rgb(241, 167, 28);
+  }
+  
+  #features .desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 125px;
+    width: 80vw;
+    padding: 5px;
+  }
+
+  #how-it-works {
+      display: flex;
+      justify-content: center;
+      margin-top: 70px;
+  }
+
+  #how-it-works > iframe {
+    max-width: 560px;
+    width: 100%;
+  }
+
+  #pricing {
+    display: flex;    
+    width: 80%;      
+    margin: 75px auto;    
+    justify-content: space-around;
+  }
+
+  .instrument {
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      width: 30%;
+      min-width: 150px;
+  }
+
+  .instrument > ul {
+      list-style-type: none;
+      margin-top: 20px;
+      line-height: 30px;
+      margin-bottom: 20px;
+  }
+
+  .instrument > p {
+    background-color: rgb(221, 221, 221);
+    width: 100%;
+    padding: 15px 25px;
+    text-align: center;    
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .instrument > button {
+      background-color: goldenrod;
+      padding: 8px 22px;
+      border: 0px;
+      margin-bottom: 20px;            
+  }
+
+  @media only screen and (max-width: 800px) {
+    #features .icon {
+        display: none;
+    }
+
+    #pricing {
+        flex-direction: column;
+    }
+
+    .instrument {
+        min-width: 250px;
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    #logo-div {
+        display: none;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+  }
