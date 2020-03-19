@@ -1,5 +1,6 @@
 'use strict';
 
+//setup morse code dictionary
 let MORSE_CODE = {
     '-.-.--': '!',
     '.-..-.': '"',
@@ -58,7 +59,31 @@ let MORSE_CODE = {
     '...---...': 'SOS'
 }
 
-decodeMorse = function(morseCode) {
+//translate binary transmission to morse code
+var decodeBits = function(bits){        
+    let transmissionRate = 2;
+
+    let wordSpaceValue = '0000000'.repeat(transmissionRate);    
+    let wordSpaceRegex = new RegExp(wordSpaceValue, "gi");
+
+    let charSpaceValue = '000'.repeat(transmissionRate);    
+    let charSpaceRegex = new RegExp(charSpaceValue, "gi");
+
+    let dashValue = '111'.repeat(transmissionRate);    
+    let dashRegex = new RegExp(dashValue, "gi");
+
+    let dotValue = '1'.repeat(transmissionRate);    
+    let dotRegex = new RegExp(dotValue, "gi");
+
+    let morsePauseValue = '0'.repeat(transmissionRate);    
+    let morsePauseRegex = new RegExp(morsePauseValue, "gi");
+    
+    return(bits.trim().replace(wordSpaceRegex, '   ').replace(charSpaceRegex, ' ').replace(dashRegex, '-').replace(dotRegex, '.').replace(morsePauseRegex, ''));
+}
+
+
+//decode morse code - translate morse codes to ASCII
+let decodeMorse = function(morseCode) {
     let translationArr = [];            
     
     let wordArr = morseCode.trim().split('   ');           
@@ -78,4 +103,7 @@ decodeMorse = function(morseCode) {
     return translationArr.join(' ');
 }
 
-decodeMorse('.... . -.--   .--- ..- -.. .') // 'HEY JUDE'
+
+console.log(decodeMorse(decodeBits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011')));
+
+//decodeMorse('.... . -.--   .--- ..- -.. .') // 'HEY JUDE'
