@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 //setup morse code dictionary
 let MORSE_CODE = {
@@ -60,8 +60,8 @@ let MORSE_CODE = {
 }
 
 //translate binary transmission to morse code
-var decodeBits = function(bits){        
-    let transmissionRate = 2;
+let decodeBits = function(bits){        
+    //let transmissionRate = 2;
 
     let wordSpaceValue = '0000000'.repeat(transmissionRate);    
     let wordSpaceRegex = new RegExp(wordSpaceValue, "gi");
