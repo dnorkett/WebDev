@@ -30,3 +30,22 @@ class LikeButton extends React.Component {
 
 const domContainer = document.querySelector('#like_button_container');
 ReactDOM.render(e(LikeButton), domContainer);
+
+
+//misc
+let JSX = (
+            <div>
+                <h1> Title! </h1>
+                <p> Paragraph! </p>
+                <ul>
+                    <li> li one! </li>
+                    {/*Comment*/}
+                    <li> li two! </li>
+                    <li> li three! </li>
+                </ul>
+            </div>
+);
+
+const MyComponent = function() {  
+  return (<div> some string of text </div>);  
+}
