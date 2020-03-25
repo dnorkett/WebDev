@@ -182,10 +182,6 @@ let listBinding = new ListBinding(myList);
 
 
 
-
-
-
-
 //Class example with super
 /* class Animal {
   constructor(name) {

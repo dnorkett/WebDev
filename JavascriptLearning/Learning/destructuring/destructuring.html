@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring</title>
+</head>
+<body>
+    <script>
+        const alphabet = ['A','B','C','D','E','F'];
+        const numbers = ['1','2','3','4','5'];
+        
+        //const a = alphabet[0];
+        //const b = alphabet[1];
+        //Put element to destructure on right, items to assign on left
+        //Based on position
+        const [a,b] = alphabet;
+
+        //Put empty comma to skip
+        const [A,, C] = alphabet;
+
+        //To get all, use spread operation
+        const [aa, bb, ...rest] = alphabet;
+
+        //Can combine two arrays
+        const newArray=[...alphabet, ...numbers];
+
+
+        //
+        function sumAndMultiply(a,b) {
+            return [a+b, a*b];
+        }
+
+        const [sum, multiply, division = 'No division'] = sumAndMultiply(2,3);
+
+
+        //OBJECT DESTRUCTURING
+        //Based on key
+        const personOne = {
+            name: 'Kyle',
+            age: 24,
+            address: {
+                city: 'Somewhere',
+                state: 'One of them'
+            }
+        }
+
+        const personTwo = {       
+            age: 32,
+            address: {
+                city: 'Somewhere else',
+                state: 'Another one of them'
+            }
+        }
+
+        const {name: firstName, ...rest2} = personOne;  //takes name property from person, maps it to firstName instead of name variable
+        console.log(firstName);
+        console.log(rest2);
+
+        //Can also destructure nested objects
+        const {address: {city}} = personOne;
+        console.log(city);
+        
+        //combine objects, personTwo overwrites person one
+        const personThree = {...personOne, ...personTwo}
+        console.log(personThree);
+        
+
+        //Destructuring in function parameters. Pass an object, but only need name and age properties
+        function printUser({name , age, favoriteFood = 'Watermelon'}) {
+            console.log(name);
+            console.log(age);
+            console.log(favoriteFood);
+        }
+
+    </script>      
+</body>
+</html>
