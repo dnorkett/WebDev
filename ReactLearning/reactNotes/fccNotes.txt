@@ -46,3 +46,161 @@ class Counter extends React.Component {
 
 
 //CONTROLLED INPUT
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+
+  handleSubmit(event) {   
+    event.preventDefault()
+    this.setState({
+      submit: this.state.input
+    })    
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>          
+          <input type='text' value={this.state.input} onChange={this.handleChange}/>          
+          <button type='submit'>Submit!</button>
+        </form>        
+        <h1>{this.state.submit}</h1>        
+      </div>
+    );
+  }
+};
+
+
+//Passing props between components
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Don'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name={this.state.name} />
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+    <div>
+      <h1>Hello, my name is: {this.props.name} </h1>
+    </div>
+    );
+  }
+};
+
+
+//PASSING A CALLBACK FUNCTION
+//Also, passing state between parent stateful function and children stateless
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+
+  render() {
+    return (
+       <div>        
+        <GetInput input={this.state.inputValue} handleChange={this.handleChange} />
+        <RenderInput input={this.state.inputValue}/>        
+       </div>
+    );
+  }
+};
+
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
+
+
+//SIMULATED API CALL
+//Illustrates componentDidMount method, which runs every time it's rendered to the DOM
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: null
+    };
+  }
+
+  componentDidMount() {
+    setTimeout( () => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  
+  render() {
+    return (
+      <div>
+        <h1>Active Users: {this.state.activeUsers}</h1>
+      </div> 
+    );
+  }
+};
+
