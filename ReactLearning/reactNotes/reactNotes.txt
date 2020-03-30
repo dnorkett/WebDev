@@ -420,6 +420,7 @@ class CheckUserAge extends React.Component {
     const buttonOne = <button onClick={this.submit}>Submit</button>;
     const buttonTwo = <button>You May Enter</button>;
     const buttonThree = <button>You Shall Not Pass</button>;
+
     return (
       <div>
         <h3>Enter Your Age to Continue</h3>
@@ -560,6 +561,7 @@ class MyToDoList extends React.Component {
 
   render() {
     const items = this.state.toDoList.map(i => <li>{i}</li>);
+    
     return (
       <div>
         <textarea

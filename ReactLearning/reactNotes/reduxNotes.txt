@@ -357,7 +357,7 @@ const addToDo = (todo) => {
     type: ADD_TO_DO,
     todo
   }
-}
+};
 
 const store = Redux.createStore(immutableReducer);
 
@@ -407,4 +407,3 @@ const wakeUp = () => {
 };
 
 const store = Redux.createStore(immutableReducer);
-
