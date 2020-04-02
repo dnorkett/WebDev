@@ -1,5 +1,5 @@
 marked.setOptions({breaks: true,});
-const INITIAL_VALUE = `# React Markdown Previewer!
+const INITIAL_VALUE = `# React Github-Markdown Previewer!
 
 ## Here's an H2 element! What else can we do???
   

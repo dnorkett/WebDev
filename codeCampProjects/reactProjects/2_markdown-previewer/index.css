@@ -74,3 +74,11 @@
     font-size: 1rem;    
     flex-direction: column;    
   }
+
+ul {
+  padding-left: 35px;
+}
+
+h1 {
+  padding-bottom: 15px;
+}
