@@ -1,65 +1,96 @@
-//Workaround due to CodePen's file hosting limitation
-const soundLocation = 'https://donnorkett.com/learning/drums/sounds/';
+marked.setOptions({breaks: true,});
+const INITIAL_VALUE = `# React Github-Markdown Previewer!
 
-class DrumPad extends React.Component {
-  constructor(props){
-    super(props);    
-    this.playKeyAudio = this.playKeyAudio.bind(this);
-    this.playClickAudio = this.playClickAudio.bind(this);
-    this.url = soundLocation + this.props.drumType + '.wav'; 
-  }
+## Here's an H2 element! What else can we do???
   
-  componentDidMount() {
-    document.addEventListener('keydown', this.playKeyAudio);
-  }
-  
-  playKeyAudio(e) {
-    if (e.keyCode == this.props.keyName.charCodeAt()) {            
-      const sound = document.getElementById(this.props.keyName);
-      sound.currentTime = 0;
-      sound.play();        
-    }    
-  }
-  
-  playClickAudio() {    
-    const sound = document.getElementById(this.props.keyName);
-    sound.currentTime = 0;
-    sound.play();        
-  }
+How about some inline code? \`<div>some inline code</div>\`
 
-  render() {    
-    return (
-      <div onClick={this.playClickAudio} className="drum-pad" id={this.props.drumType}>        
-        <h1>{this.props.keyName}</h1>
-        <audio preload src={this.url} className="clip" id={this.props.keyName}></audio>
-      </div>
-    );
-  }
+
+\`\`\`
+// Now lets look at some multi-line code:
+
+function helloWorld() {
+  console.log("Hello world!");
 }
+\`\`\`
 
+Perhaps you want some **bold** text?
 
-class App extends React.Component {
-  constructor(props){
-    super(props);    
-      }
+There's also [links](https://www.freecodecamp.com), and even
+> Block Quotes!
 
-  render() {
-    return (
-      <div id="drum-machine">
-        <div id="display">
-          <DrumPad drumType="boom" keyName="Q"/>
-          <DrumPad drumType="clap" keyName="W"/>
-          <DrumPad drumType="hihat" keyName="E"/>
-          <DrumPad drumType="kick" keyName="A"/>
-          <DrumPad drumType="openhat" keyName="S"/>
-          <DrumPad drumType="ride" keyName="D"/>
-          <DrumPad drumType="snare" keyName="Z"/>
-          <DrumPad drumType="tink" keyName="X"/>
-          <DrumPad drumType="tom" keyName="C"/>
+We can also do a list:
+- Like this
+- and this...
+- ...and this!
+  
+You can even use images. This preview was made with REACT!
+![React Logo w/ Text](https://goo.gl/Umyytc)
+`
+
+class Editor extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+    
+    render() {
+      return (
+        <div id="editorWindow" className="mainBox">
+          <div className="title"> 
+            (<i className="fa fa-flask"></i>) - <strong>Editor</strong>
+          </div>
+          <div className="lowerBox">
+            <textarea id="editor" value={this.props.input} onChange={this.props.handleChange}> </textarea>
+          </div>
+        </div>  
+      )
+    }
+  }
+  
+  class Previewer extends React.Component {
+    constructor(props){
+      super(props);
+    }
+    
+    render() {
+      let markUp = marked(this.props.input);
+      
+      return (
+        <div id="previewerWindow" className="mainBox">
+          <div className="title"> 
+            (<i className="fa fa-flask"></i>) - <strong>Previewer</strong>
+          </div>
+          <div className="lowerBox" id="preview" dangerouslySetInnerHTML={{__html: markUp}}>
+          </div>
+        </div>  
+      )
+    }
+  }
+  
+  
+  class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            input: INITIAL_VALUE
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({
+            input: e.target.value
+        });
+    }
+    
+    render() {
+      return (
+        <div id="main">
+          <Editor input={this.state.input} handleChange={this.handleChange} />
+          <Previewer input={this.state.input}/>
         </div>
-      </div>
-    )
+      );
+    }
   }
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+  
+  ReactDOM.render(<App />, document.getElementById('root'));
