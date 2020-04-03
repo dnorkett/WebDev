@@ -3,3 +3,58 @@
   margin: 0;  
   padding: 0;    
 }
+
+#drum-machine {
+  background-image: url(https://images.unsplash.com/photo-1475552013742-eb6eb701988c?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  height: 100vh;
+  display: flex;  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+#drums {
+  
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 5px;
+  grid-column-gap: 5px;
+  padding: 30px;
+  background-color: rgb(212, 212, 212);
+  }
+
+#display {
+  height: 310px;
+  width: 200px;  
+  display: flex;  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgb(212, 212, 212);
+}
+
+.drum-pad {
+  background-color: rgba(117, 117, 117, 0.95);
+  border-radius: 10px;
+  width: 100px;
+  height: 80px;
+  display: flex;  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#screen {
+  border: 2px solid black;
+  height: 35px;
+  width: 175px;  
+  display: flex;  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(189, 189, 189);
+}
