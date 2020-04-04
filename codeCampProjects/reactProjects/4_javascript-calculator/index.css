@@ -10,11 +10,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1 {
-  
-}
-
-.rootClass {
+#calculator {
   background-color: white;
   border-radius: 4px;
   padding: 30px;
