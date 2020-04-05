@@ -34,136 +34,119 @@ class Buttons extends React.Component {
       <div>
         <button 
           id="clear" 
-          onClick={this.props.allClear}
-          class="clear" 
+          onClick={this.props.allClear}          
           value="AC"
         >
           AC
         </button>
         <button 
           id="divide" 
-          onClick={this.props.operatorClick}
-          class="operator" 
+          onClick={this.props.operatorClick}          
           value="/"
         >
           /
         </button>
         <button 
           id="multiply" 
-          onClick={this.props.operatorClick}
-          class="operator" 
+          onClick={this.props.operatorClick}          
           value="*"
         >
           *
         </button>
         <button 
           id="seven" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="7"
         >
           7
         </button>
         <button 
           id="eight" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="8"
         >
           8
         </button>
         <button 
           id="nine" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="9"
         >
           9
         </button>
         <button 
           id="subtract" 
-          onClick={this.props.operatorClick}
-          class="operator" 
+          onClick={this.props.operatorClick}          
           value="-"
         >
           -
         </button>
         <button 
           id="four" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="4"
         >
           4
         </button>
         <button 
           id="five" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="5"
         >
           5
         </button>
         <button 
           id="six" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="6"
         >
           6
         </button>
         <button 
           id="add" 
-          onClick={this.props.operatorClick}
-          class="operator" 
+          onClick={this.props.operatorClick}          
           value="+"
         >
           +
         </button>
         <button 
           id="one" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="1"
         >
           1
         </button>
         <button 
           id="two" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="2"
         >
           2
         </button>
         <button 
           id="three" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="3"
         >
           3
         </button>
         <button 
           id="equals" 
-          onClick={this.props.equalsClick}
-          class="operator" 
+          onClick={this.props.equalsClick}          
           value="="
         >
           =
         </button>
         <button 
           id="zero" 
-          onClick={this.props.numberClick}
-          class="number" 
+          onClick={this.props.numberClick}          
           value="0"
         >
           0
         </button>
         <button 
           id="decimal" 
-          onClick={this.props.decimalClick}
-          class="decimal" 
+          onClick={this.props.decimalClick}          
           value="."
         >
           .
@@ -180,7 +163,7 @@ class App extends React.Component {
     this.state = {
       displayValue: '0',
       formulaValue: '',
-      previousValue: ''
+      previousValue: '',            
     };
     this.allClear = this.allClear.bind(this);
     this.numberClick = this.numberClick.bind(this);
@@ -197,46 +180,89 @@ class App extends React.Component {
   }
 
   numberClick(e) {
-    if (this.state.displayValue == '0') {
+    if (this.state.displayValue == '0'){
       this.setState({
         displayValue: e.target.value,
+        formulaValue: this.state.formulaValue + e.target.value,
         previousValue: e.target.value
       })
-    } else {
+    } else if (this.state.previousValue == '=') {
+      this.setState({
+        displayValue: e.target.value,
+        formulaValue: e.target.value,
+        previousValue: e.target.value
+      })
+    } else if (this.state.displayValue == '+' || this.state.displayValue == '-' || this.state.displayValue == '*' || this.state.displayValue == '/') {
+      this.setState({
+        displayValue: e.target.value,
+        formulaValue: this.state.formulaValue + e.target.value,
+        previousValue: e.target.value
+      })
+    } else {    
       this.setState({
         displayValue: this.state.displayValue + e.target.value,
+        formulaValue: this.state.formulaValue + e.target.value,
         previousValue: e.target.value
       })
     }
   }
 
-  operatorClick(e) {
+  operatorClick(e) {       
+    if (this.state.previousValue == '=') {
+      this.setState({
+        formulaValue: this.state.displayValue + e.target.value,
+        displayValue: e.target.value,        
+        previousValue: e.target.value
+      })
+    } else if (this.state.displayValue == '+' || this.state.displayValue == '-' || this.state.displayValue == '*' || this.state.displayValue == '/') {
+        if (this.state.previousValue === "-" && this.state.formulaValue.slice(-2,-1) === "*") {
+          this.setState({            
+            displayValue: e.target.value,
+            formulaValue: this.state.formulaValue.slice(0,-2) + e.target.value,
+            previousValue: e.target.value
+        })
+        } else if (e.target.value == '-' && this.state.previousValue != '-') {
+            this.setState ({
+              displayValue: e.target.value,
+              formulaValue: this.state.formulaValue + e.target.value,
+              previousValue: e.target.value              
+            })
+          } else {
+            this.setState({              
+              displayValue: e.target.value,
+              formulaValue: this.state.formulaValue.slice(0,-1) + e.target.value,
+              previousValue: e.target.value
+          })
+        }  
+    } else {
     this.setState({
-      formulaValue: this.state.formulaValue + this.state.displayValue,
       displayValue: e.target.value,
+      formulaValue: this.state.formulaValue + e.target.value,
       previousValue: e.target.value
-    })
-
+      })    
+    }
   }
 
   decimalClick(e) {
     if (this.state.previousValue != e.target.value && !this.state.displayValue.includes(e.target.value)) {
       this.setState({
         displayValue: this.state.displayValue + e.target.value,
+        formulaValue: this.state.formulaValue + e.target.value,
         previousValue: e.target.value
       });
     }    
   }
 
-  equalsClick(e) {
-    let equation = this.state.formulaValue + this.state.displayValue;
-    let answer = eval(equation);
+  equalsClick(e) {    
+    if (this.state.previousValue != '=') {      
+      let answer = eval(this.state.formulaValue);
 
-    this.setState({
-      formulaValue: equation + e.target.value + answer,
-      displayValue: answer,
-      previousValue: e.target.value
-    })
+      this.setState({
+        formulaValue: this.state.formulaValue + e.target.value + answer,
+        displayValue: answer,
+        previousValue: e.target.value
+      });
+    }
   }
 
   
