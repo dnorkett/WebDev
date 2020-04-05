@@ -1,18 +1,3 @@
-class Formula extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div id="formula">
-        {this.props.formula}
-      </div>
-    )
-  }
-}
-
-
 class Display extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +5,13 @@ class Display extends React.Component {
 
   render() {
     return (
-      <div id="display">
-        {this.props.output}
+      <div id="displayApp"> 
+        <div id="formula">
+          {this.props.formula}
+        </div>
+        <div id="display">
+          {this.props.output}
+        </div>
       </div>
     )
   }
@@ -31,7 +21,7 @@ class Display extends React.Component {
 class Buttons extends React.Component {
   render() {
     return (
-      <div>
+      <div id="calculatorButtons">
         <button 
           id="clear" 
           onClick={this.props.allClear}          
@@ -43,6 +33,7 @@ class Buttons extends React.Component {
           id="divide" 
           onClick={this.props.operatorClick}          
           value="/"
+          className="operand"
         >
           /
         </button>
@@ -50,6 +41,7 @@ class Buttons extends React.Component {
           id="multiply" 
           onClick={this.props.operatorClick}          
           value="*"
+          className="operand"
         >
           *
         </button>
@@ -57,13 +49,15 @@ class Buttons extends React.Component {
           id="seven" 
           onClick={this.props.numberClick}          
           value="7"
+          className="number"
         >
           7
         </button>
         <button 
           id="eight" 
-          onClick={this.props.numberClick}          
+          onClick={this.props.numberClick}                   
           value="8"
+          className="number"
         >
           8
         </button>
@@ -71,6 +65,7 @@ class Buttons extends React.Component {
           id="nine" 
           onClick={this.props.numberClick}          
           value="9"
+          className="number"
         >
           9
         </button>
@@ -78,6 +73,7 @@ class Buttons extends React.Component {
           id="subtract" 
           onClick={this.props.operatorClick}          
           value="-"
+          className="operand"
         >
           -
         </button>
@@ -85,6 +81,7 @@ class Buttons extends React.Component {
           id="four" 
           onClick={this.props.numberClick}          
           value="4"
+          className="number"
         >
           4
         </button>
@@ -92,6 +89,7 @@ class Buttons extends React.Component {
           id="five" 
           onClick={this.props.numberClick}          
           value="5"
+          className="number"
         >
           5
         </button>
@@ -99,6 +97,7 @@ class Buttons extends React.Component {
           id="six" 
           onClick={this.props.numberClick}          
           value="6"
+          className="number"
         >
           6
         </button>
@@ -106,6 +105,7 @@ class Buttons extends React.Component {
           id="add" 
           onClick={this.props.operatorClick}          
           value="+"
+          className="operand"
         >
           +
         </button>
@@ -113,6 +113,7 @@ class Buttons extends React.Component {
           id="one" 
           onClick={this.props.numberClick}          
           value="1"
+          className="number"
         >
           1
         </button>
@@ -120,6 +121,7 @@ class Buttons extends React.Component {
           id="two" 
           onClick={this.props.numberClick}          
           value="2"
+          className="number"
         >
           2
         </button>
@@ -127,6 +129,7 @@ class Buttons extends React.Component {
           id="three" 
           onClick={this.props.numberClick}          
           value="3"
+          className="number"
         >
           3
         </button>
@@ -141,6 +144,7 @@ class Buttons extends React.Component {
           id="zero" 
           onClick={this.props.numberClick}          
           value="0"
+          className="number"
         >
           0
         </button>
@@ -148,6 +152,7 @@ class Buttons extends React.Component {
           id="decimal" 
           onClick={this.props.decimalClick}          
           value="."
+          className="number"
         >
           .
         </button>
@@ -268,9 +273,8 @@ class App extends React.Component {
   
   render() {
     return (
-      <div id="calculator">
-        <Formula formula={this.state.formulaValue}/>
-        <Display output={this.state.displayValue}/>
+      <div id="calculator">        
+        <Display formula={this.state.formulaValue} output={this.state.displayValue}/>
         <Buttons allClear={this.allClear} numberClick={this.numberClick} operatorClick={this.operatorClick} decimalClick={this.decimalClick} equalsClick={this.equalsClick}/>
       </div>
     );
