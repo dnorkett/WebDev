@@ -5,14 +5,14 @@ class TimerControl extends React.Component {
 
   render() {
     return (
-      <div id={this.props.componentId}>
-        <h3>{this.props.componentTitle}</h3>
+      <div className="timerControlContainer" id={this.props.componentId}>
+        <p className="timerControlDisplay">{this.props.componentTitle}</p>
         <div className="controls">
           <button id={this.props.decrementId} onClick={() => this.props.decrementFunction(this.props.timerType)}>
             <i className="fa fa-arrow-down"></i> 
           </button>
             
-          <span id={this.props.lengthId}>{this.props.length}</span>
+          <span className="timerControlDisplay" id={this.props.lengthId}>{this.props.length}</span>
           
           <button id={this.props.incrementId} onClick={() => this.props.incrementFunction(this.props.timerType)}>
             <i className="fa fa-arrow-up"></i>
@@ -71,6 +71,8 @@ class App extends React.Component {
 
   reset() {
     clearInterval(this.intervalID);
+    this.audioBeep.pause();
+    this.audioBeep.currentTime = 0;
 
     this.setState({
       timer: 1500,
@@ -134,8 +136,9 @@ class App extends React.Component {
       this.setState({
         timer: this.state.timer - 1
       })
-    }else if(this.state.timer == 0) {
-      clearInterval(this.intervalID);
+    } else if(this.state.timer == 0) {
+        this.audioBeep.play();
+        clearInterval(this.intervalID);
 
       if (this.state.timerType == 'Session') {
         this.setState({
@@ -157,7 +160,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="main_app">
-        <h1> Pomodoro Clock </h1>
+        <h1 id="pageTitle"> Pomodoro Clock </h1>
         <div id="timerControls" className="controls">
           <TimerControl 
             length={this.state.breakLength / 60}
@@ -182,13 +185,17 @@ class App extends React.Component {
             incrementFunction={this.incrementTimer}
             />
         </div>
-        <p id="timer-label"> {this.state.timerType} </p>
-        <p id="time-left"> {this.convertToClock()} </p>     
+        <div id="timerDisplay">
+          <p id="timer-label"> {this.state.timerType} </p>
+          <p id="time-left"> {this.convertToClock()} </p>
+        </div>
+        
         <div id="sessionControls" className="controls">
           <SessionControl 
             resetFunction={this.reset}
             timerFunction={this.startStopTimer}
           />
+          <audio id="beep" preload="auto" src="https://donnorkett.com/learning/miscFiles/Simple-alert-bells-tone.mp3" ref={(audio) => { this.audioBeep = audio; }}/>     
         </div>       
       </div>
     );

@@ -11,6 +11,72 @@ body {
   color: gold;
 }
 
+#main_app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;    
+}
+
+#timerControls {  
+  padding: 10px;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background-color: rgb(19, 34, 82);
+  color: gold;
+  border: none;
+  font-size: 1.5em;    
+}
+
+.timerControlDisplay {
+  font-size: 1.5em;    
+}
+
+.timerControlContainer {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#pageTitle {
+  font-size: 3em;
+  margin:0;
+}
+
 .controls {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#timerDisplay {
+  border: 6px solid gold;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;  
+  margin: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#timer-label {
+  font-size:1.75em;
+  margin:0;
+  padding: 0;
+}
+
+#time-left {
+  font-size: 3.5em;
+  margin: 0;
+  padding: 0;
+}
+
+#sessionControls {
+  padding: 10px;
 }
