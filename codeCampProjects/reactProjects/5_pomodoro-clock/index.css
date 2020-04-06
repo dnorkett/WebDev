@@ -8,8 +8,9 @@ body {
   align-content: center;
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: gold;
 }
 
-#controls {
+.controls {
   display: flex;
 }

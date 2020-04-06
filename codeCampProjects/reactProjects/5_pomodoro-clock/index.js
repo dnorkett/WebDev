@@ -5,17 +5,17 @@ class TimerControl extends React.Component {
 
   render() {
     return (
-      <div id={this.props.componentID}>
+      <div id={this.props.componentId}>
         <h3>{this.props.componentTitle}</h3>
         <div className="controls">
-          <button>
-            <i class="fa fa-arrow-down"></i> 
+          <button id={this.props.decrementId} onClick={() => this.props.decrementFunction(this.props.timerType)}>
+            <i className="fa fa-arrow-down"></i> 
           </button>
             
-          {this.props.length} 
+          <span id={this.props.lengthId}>{this.props.length}</span>
           
-          <button>
-            <i class="fa fa-arrow-up"></i>
+          <button id={this.props.incrementId} onClick={() => this.props.incrementFunction(this.props.timerType)}>
+            <i className="fa fa-arrow-up"></i>
           </button>
         </div>
       </div>
@@ -23,39 +23,177 @@ class TimerControl extends React.Component {
   }
 }
 
+
+class SessionControl extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+          <button id="start_stop" onClick={this.props.timerFunction}>
+            <i className="fa fa-play"></i>  <i className="fa fa-pause"></i> 
+          </button>
+          <button id="reset" onClick={this.props.resetFunction}>
+            <i className="fa fa-refresh"></i>
+          </button>
+      </div>
+    )
+  }
+}
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
          timer: 1500,
-         breakLength: 1,
-         sessionLength: 2,
-    };    
+         breakLength: 300,
+         sessionLength: 1500,
+         timerStatus: 'stopped',
+         timerType: 'Session'
+    };
+    this.convertToClock = this.convertToClock.bind(this);  
+    this.reset = this.reset.bind(this);    
+    this.decrementTimer = this.decrementTimer.bind(this);
+    this.incrementTimer = this.incrementTimer.bind(this);
+    this.startStopTimer = this.startStopTimer.bind(this);
+    this.tick = this.tick.bind(this);    
+  }
+
+  convertToClock() {
+    let minutes = Math.floor(this.state.timer / 60);
+    let seconds = Math.floor(this.state.timer % 60);
+
+    return `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+  }
+
+  reset() {
+    clearInterval(this.intervalID);
+
+    this.setState({
+      timer: 1500,
+      breakLength: 300,
+      sessionLength: 1500,
+      timerStatus: 'stopped',
+      timerType: 'Session'
+    });
+  }
+
+  decrementTimer(timerType) {
+    if (this.state.timerStatus == 'stopped') {
+      switch (timerType) {
+        case 'breakLength':
+          this.setState({
+            breakLength: this.state.breakLength >= 120 ? this.state.breakLength - 60 : this.state.breakLength
+          });
+          break;
+        case 'sessionLength':
+          this.setState({
+            sessionLength: this.state.sessionLength >= 120 ? this.state.sessionLength - 60 : this.state.sessionLength,
+            timer: this.state.sessionLength >= 120 ? this.state.sessionLength - 60 : this.state.sessionLength,
+          });
+          break;
+      }
+    }
+  }
+
+  incrementTimer(timerType) {
+    if (this.state.timerStatus == 'stopped') {
+      switch (timerType) {
+        case 'breakLength':
+          this.setState({
+            breakLength: this.state.breakLength <= 3540 ? this.state.breakLength + 60 : this.state.breakLength
+          });
+          break;
+        case 'sessionLength':
+          this.setState({
+            sessionLength: this.state.sessionLength <= 3540 ?  this.state.sessionLength + 60 : this.state.sessionLength,
+            timer: this.state.sessionLength <= 3540 ?  this.state.sessionLength + 60 : this.state.sessionLength
+          });
+          break;
+      }
+    }
+  }
+
+  startStopTimer() {
+    if (this.state.timerStatus == 'stopped') {
+      this.intervalID = setInterval(() => this.tick(), 1000);
+      this.setState({timerStatus: 'running'});
+    }
+
+    if (this.state.timerStatus == 'running') {
+      clearInterval(this.intervalID);
+      this.setState({timerStatus: 'stopped'});
+    }    
+  }
+
+  tick() {
+    if (this.state.timer > 0) {
+      this.setState({
+        timer: this.state.timer - 1
+      })
+    }else if(this.state.timer == 0) {
+      clearInterval(this.intervalID);
+
+      if (this.state.timerType == 'Session') {
+        this.setState({
+          timerStatus: 'stopped',
+          timerType: 'Break',
+          timer: this.state.breakLength,
+        }, this.startStopTimer);
+        
+      } else {
+        this.setState({
+          timerStatus: 'stopped',
+          timerType: 'Session',
+          timer: this.state.sessionLength
+        }, this.startStopTimer);        
+      }      
+    }
   }
   
   render() {
     return (
       <div id="main_app">
         <h1> Pomodoro Clock </h1>
-        <div id="controls">
+        <div id="timerControls" className="controls">
           <TimerControl 
-            length={this.state.breakLength}
-            componentID='break-label'
+            length={this.state.breakLength / 60}
+            componentId='break-label'
             componentTitle='Break Length'
+            lengthId="break-length"
+            decrementId='break-decrement'
+            incrementId='break-increment'    
+            timerType='breakLength'               
+            decrementFunction={this.decrementTimer}
+            incrementFunction={this.incrementTimer}
             />
           <TimerControl 
-            length={this.state.sessionLength}
-            componentID='session-label'
+            length={this.state.sessionLength / 60}
+            componentId='session-label'
             componentTitle='Session Length'
+            lengthId="session-length"            
+            decrementId='session-decrement'
+            incrementId='session-increment'
+            timerType='sessionLength'                                              
+            decrementFunction={this.decrementTimer}
+            incrementFunction={this.incrementTimer}
             />
         </div>
-        <h2> Session </h2>
-        <h2> {this.state.timer} </h2>
-        <h4> <i class="fa fa-play"></i>  <i class="fa fa-pause"></i> <i class="fa fa-stop"></i></h4>
+        <p id="timer-label"> {this.state.timerType} </p>
+        <p id="time-left"> {this.convertToClock()} </p>     
+        <div id="sessionControls" className="controls">
+          <SessionControl 
+            resetFunction={this.reset}
+            timerFunction={this.startStopTimer}
+          />
+        </div>       
       </div>
     );
   }
 }
-  
+
   
 ReactDOM.render(<App />,document.getElementById('root'));  
