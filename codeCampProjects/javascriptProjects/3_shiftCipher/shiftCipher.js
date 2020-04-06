@@ -3,8 +3,7 @@
 
 function rot13(str) { //
     //Use character codes to add 13. If answer is greater than 26, look at answer-26
-    //Loop through each character and add to return variable
-  
+    //Loop through each character and add to return variable  
     let decodedStr = '';
   
     for (let i = 0; i < str.length; i++) {
